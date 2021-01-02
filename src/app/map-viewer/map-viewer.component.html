@@ -1,0 +1,39 @@
+<mat-sidenav-container>
+    <mat-sidenav #sidenavtree mode="side" position="end" opened="false" class="map-sidenav" [style.width]="test">
+        <fluke-layer-viewer></fluke-layer-viewer>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-sidenav-container>
+            <mat-sidenav #sidenavcmd mode="side" position="end" opened="false" class="map-sidenav" [style.width]="test">
+                <!--<command-executor (exportRoute)="importGeoJson($event)"></command-executor>-->
+            </mat-sidenav>
+
+            <mat-sidenav-content>
+                <div class="map" leaflet [leafletOptions]="options" [leafletLayers]="layers.visible"
+                    (leafletMapReady)="onMapReady($event)" (leafletClick)="onMapClick($event)">
+                </div>
+            </mat-sidenav-content>
+        </mat-sidenav-container>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+
+
+<mat-toolbar class="map-footer" color="primary">
+    <mat-card>
+        <mat-slide-toggle color="primary" checked="false" [(ngModel)]="togglePickPos">Picker</mat-slide-toggle>
+        <mat-card-content>
+            lat:<input value={{inputPosLat}}> / lon:<input value={{inputPosLng}} />
+        </mat-card-content>
+    </mat-card>
+
+
+    <mat-slide-toggle class="sidenav-toggler" color="primary" checked="true" (change)="sidenavtree.toggle()">Tree
+    </mat-slide-toggle>
+    <mat-slide-toggle class="sidenav-toggler" color="primary" checked="true" (change)="sidenavcmd.toggle()">Commands
+    </mat-slide-toggle>
+    <mat-slider invert min="10" max="40" step="1" [(ngModel)]="sideNavWidth" (change)='_sideNavWidthChange()'>
+    </mat-slider>
+
+</mat-toolbar>

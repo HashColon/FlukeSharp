@@ -1,0 +1,22 @@
+<mat-expansion-panel [(disabled)]='isDisabled' (click)='isDisabled=isRenameLayer||false' togglePosition='before'>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            {{type}}
+        </mat-panel-title>
+        <mat-panel-description>
+            <input [(value)]='label' appearance='none' (focus)='isDisabled=true;isRenameLayer=true'
+                (blur)='isDisabled=false;isRenameLayer=false' (change)='_renameLayer($event.target.value)'>
+            <button mat-icon-button (click)='isDisabled=true;_toggleLayer()'>
+                <mat-icon>visibility</mat-icon>
+            </button>
+            <button mat-icon-button (click)='isDisabled=true;_deleteLayer()'>
+                <mat-icon>delete</mat-icon>
+            </button>
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <fluke-layer-editor-geojson *ngIf="type==='GeoJSON'" [layer]='layer' [label]='label'>
+
+    </fluke-layer-editor-geojson>
+
+</mat-expansion-panel>

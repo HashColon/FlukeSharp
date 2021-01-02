@@ -1,0 +1,28 @@
+<mat-toolbar color='primary'>
+
+    <button mat-icon-button matTooltip='Add a new layer' [matMenuTriggerFor]="layerTypeMenu">
+        <mat-icon>note_add</mat-icon>
+    </button>
+    <mat-menu #layerTypeMenu="matMenu">
+        <button mat-menu-item *ngFor='let type of layerTypes | keyvalue'
+            (click)='_addNewLayer(type.key)'>{{type.key}}</button>
+    </mat-menu>
+
+    <button mat-icon-button matTooltip='Upload a new GeoJson file' (click)='fileInput.click()'>
+        <mat-icon>publish</mat-icon>
+    </button>
+    <button mat-icon-button matTooltip='Expand All' (click)='layerlist.openAll()'>
+        <mat-icon>unfold_more</mat-icon>
+    </button>
+    <button mat-icon-button matTooltip='Collapse All' (click)='layerlist.closeAll()'>
+        <mat-icon>unfold_less</mat-icon>
+    </button>
+</mat-toolbar>
+
+<mat-accordion multi>
+    <fluke-layer-editor *ngFor='let layer of manager.labeled | keyvalue' [label]='layer.key' [layer]='layer.value'
+        [type]='_getLayerType(layer.value)'>
+    </fluke-layer-editor>
+</mat-accordion>
+
+<input #fileInput type='file' accept='.json, .txt' multiple hidden (change)='_addNewFileLayers($event)'>

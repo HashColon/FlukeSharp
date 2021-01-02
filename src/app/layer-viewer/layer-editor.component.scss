@@ -1,0 +1,25 @@
+mat-expansion-panel-header{
+  width: 100%;
+}
+mat-panel-description input{
+    background: inherit;
+    color: inherit;
+    border: 0;
+    font: inherit;    
+}
+
+.mat-icon-button {
+
+  float:left;
+    width: 1.7em;
+    height: 1.7em;
+    line-height: 1.5em;
+    //margin-right:0.5em;
+
+    .mat-icon {
+      font-size: 1.2em;
+      width: 1.2em;
+      height: 1.2em;
+      line-height: 1.2em;
+    }
+  }

@@ -1,10 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-
-import { Icon, Marker, LatLng, TileLayer, Map, LeafletMouseEvent, GeoJSON, Layer, Polyline, LayerGroup } from 'leaflet';
-import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+
+import { GeoJSON, Layer } from 'leaflet';
 
 import { LayerManagerService } from '@fluke/services/layer-manager.service';
 import { GeoJsonValidator } from '@fluke/services/geojson-validator';
@@ -23,17 +21,14 @@ export class GeoJsonErrorStateMatcher implements ErrorStateMatcher {
 })
 export class LayerEditorGeojsonComponent implements OnInit {
 
-  type: string = "GeoJSON";
+  static readonly type: string = "GeoJSON";
   @Input() label: string;
   @Input() layer: Layer;
 
   formControl: FormControl;
   errorChecker: ErrorStateMatcher;
 
-  _GeoJson_isFormError(): boolean {
-    if (this.type != 'GeoJSON') {
-      throw new Error('_GeoJson_checkFormError is called even though this is not GeoJSON editor.');
-    }
+  _isFormError(): boolean {
     if (this.formControl.hasError('jsonInvalid')
       || this.formControl.hasError('geoJsonInvalid')
       || this.formControl.hasError('required')) {
@@ -42,32 +37,14 @@ export class LayerEditorGeojsonComponent implements OnInit {
     else return false;
   }
 
-  _isFormError(): boolean {
-    switch (this.type) {
-      case 'GeoJSON': {
-        return this._GeoJson_isFormError();
-      }
-      default: {
-        return true;
-      }
-    }
-  }
-
   _editLayer(): boolean {
-    switch (this.type) {
-      case 'GeoJSON': {
-        try {
-          this.manager.editLayer(
-            new GeoJSON(JSON.parse(this.formControl.value)),
-            this.label);
-        } catch (e) {
-          //console.log('_editLayer: ' + this.formControl.value);
-          return false;
-        } break;
-      }
-      default: {
-        break;
-      }
+    try {
+      this.manager.editLayer(
+        new GeoJSON(JSON.parse(this.formControl.value)),
+        this.label);
+    } catch (e) {
+      //console.log('_editLayer: ' + this.formControl.value);
+      return false;
     }
     return true;
   }
@@ -81,6 +58,10 @@ export class LayerEditorGeojsonComponent implements OnInit {
   constructor(public manager: LayerManagerService) { }
 
   ngOnInit(): void {
+    // if layer is not given
+    if (!this.layer) {
+      this.layer = new GeoJSON() as Layer;
+    }
     this.formControl = new FormControl(
       JSON.stringify((this.layer as GeoJSON).toGeoJSON(), null, 2),
       [Validators.required, GeoJsonValidator]);

@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatAccordion } from '@angular/material/expansion';
 
-import { Layer, GeoJSON } from 'leaflet';
+import { Layer, GeoJSON, Marker } from 'leaflet';
 
 import * as GJV from 'geojson-validation';
 import { LayerManagerService } from '@fluke/services/layer-manager.service';
-import { MatAccordion } from '@angular/material/expansion';
-
-
+import * as leafletSetting from '@fluke/services/leaflet-custom-settings';
 
 @Component({
   selector: 'fluke-layer-viewer',
@@ -17,7 +16,8 @@ export class LayerViewerComponent implements OnInit {
   @ViewChild(MatAccordion) layerlist: MatAccordion;
 
   layerTypes: { [key: string]: any } = {
-    'GeoJSON': GeoJSON
+    'GeoJSON': GeoJSON,
+    'Marker': Marker
   }
 
   constructor(public manager: LayerManagerService) { }
@@ -26,8 +26,23 @@ export class LayerViewerComponent implements OnInit {
   }
 
   _addNewLayer(type: string): void {
+
+
+    var newlayer: Layer;
+    switch (type) {
+      // Special cases which needs inputs for new layer object
+      case 'Marker': {
+        newlayer = new Marker([0, 0], { icon: leafletSetting.markerIcon });
+        break;
+      }
+      // other cases 
+      default: {
+        newlayer = new this.layerTypes[type]();
+      }
+    }
     this.manager.pushLayer(
-      new this.layerTypes[type](), this.manager.generateRandomName()
+      newlayer, null,
+      { forced: true }
     );
   }
 
@@ -67,20 +82,18 @@ export class LayerViewerComponent implements OnInit {
           }
         }
 
-        // check filename duplicates
-        var filename: string = filelist[fidx].name;
-        if (this.manager.hasLabel(filelist[fidx].name)) {
-          filename = filename + '_' + this.manager.generateRandomName();
-        }
-
         this.manager.pushLayer(
-          new GeoJSON(geojson), filename
+          new GeoJSON(geojson), filelist[fidx].name, { forced: true }
         );
       }
       fileReader.readAsText(filelist[fidx]);
     }
 
     return true;
+  }
+
+  _clearAllLayers() {
+    this.manager.clearAll();
   }
 
 }

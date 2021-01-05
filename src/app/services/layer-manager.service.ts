@@ -53,18 +53,30 @@ export class LayerManagerService {
 
   // inserts a new layer. 
   // if a layer with the given label exists, does return true. else, return false.
-  pushLayer(layer: Layer, label: string, visible: boolean = true): boolean {
+  pushLayer(layer: Layer, label: string, options: { hide?: boolean; forced?: boolean } = { hide: false, forced: false }): boolean {
 
-    if (this.hasLabel(label)) {
-      return false;
+    var newlabel: string = label === null ? '' : label.trim();
+
+    if (this.hasLabel(newlabel) ||
+      (!(label && label.trim().length))) {
+      if (options.forced) {
+        newlabel = newlabel + ((newlabel.length) ? '_' : '') + this.generateRandomName();
+
+        while (this.hasLabel(newlabel)) {
+          newlabel = label + '_' + this.generateRandomName();
+        }
+      }
+      else {
+        return false;
+      }
     }
 
     // add new labeled layer
-    this.labeled[label] = layer;
+    this.labeled[newlabel] = layer;
 
     // if the layer is set as visible, make it visible.
-    if (visible) {
-      this.visible.push(this.labeled[label]);
+    if (!options.hide) {
+      this.visible.push(this.labeled[newlabel]);
     }
 
     return true;
@@ -132,6 +144,13 @@ export class LayerManagerService {
       return true;
     }
     else return false;
+  }
+
+  clearAll(): void {
+    delete this.visible;
+    this.visible = [];
+    delete this.labeled;
+    this.labeled = {};
   }
 
 }

@@ -29,6 +29,8 @@ import { MapViewerComponent } from '@fluke/map-viewer/map-viewer.component';
 import { LayerViewerComponent } from '@fluke/layer-viewer/layer-viewer.component';
 import { LayerEditorComponent } from '@fluke/layer-viewer/layer-editor.component';
 import { LayerEditorGeojsonComponent } from '@fluke/layer-viewer/layer-editor-geojson.component';
+import { LayerEditorMarkerComponent } from '@fluke/layer-viewer/layer-editor-marker.component';
+import { CommandViewerComponent } from '../command-viewer/command-viewer.component';
 
 //import { CommandViewerComponent } from '@fluke/command-viewer/command-viewer.component';
 //import { BashExecutorComponent } from '@fluke/command-viewer/bash-executor.component';
@@ -38,7 +40,7 @@ import { LayerEditorGeojsonComponent } from '@fluke/layer-viewer/layer-editor-ge
   declarations: [
     MapViewerComponent,
     LayerViewerComponent, LayerEditorComponent,
-    LayerEditorGeojsonComponent
+    LayerEditorGeojsonComponent, LayerEditorMarkerComponent, CommandViewerComponent
     // CommandViewerComponent, BashExecutorComponent,
   ],
   imports: [

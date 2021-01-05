@@ -10,14 +10,6 @@
     right: 0;
     z-index: 3;
 }
-button {
-    z-index: 4; 
-}
-input{
-    background: #ECEFF111;
-    color: #ECEFF1;
-    border: 0;    
-}
 
 .map {
     /*position: relative;*/
@@ -30,4 +22,10 @@ input{
 .sidenav-toggler {
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.picker{
+    font-size: 0.7em; 
+    width: 30em;
+    bottom: 30%;
 }

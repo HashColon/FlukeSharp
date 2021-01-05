@@ -13,7 +13,7 @@
         JSON Code is empty
     </mat-error>
 
-    <button matSuffix mat-icon-button [color]="_GeoJson_isFormError()?'warn':'primary'">
-        <mat-icon>{{ _GeoJson_isFormError() ? 'error_outline' : 'check_circle_outline' }}</mat-icon>
+    <button matSuffix mat-icon-button [color]="_isFormError()?'warn':'primary'">
+        <mat-icon>{{ _isFormError() ? 'error_outline' : 'check_circle_outline' }}</mat-icon>
     </button>
 </mat-form-field>

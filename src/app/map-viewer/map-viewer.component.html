@@ -1,10 +1,12 @@
 <mat-sidenav-container>
-    <mat-sidenav #sidenavtree mode="side" position="end" opened="false" class="map-sidenav" [style.width]="test">
+    <mat-sidenav #sidenavtree mode="side" position="end" opened="false" class="map-sidenav"
+        [style.width]="sideNavWidth">
         <fluke-layer-viewer></fluke-layer-viewer>
     </mat-sidenav>
     <mat-sidenav-content>
         <mat-sidenav-container>
-            <mat-sidenav #sidenavcmd mode="side" position="end" opened="false" class="map-sidenav" [style.width]="test">
+            <mat-sidenav #sidenavcmd mode="side" position="end" opened="false" class="map-sidenav"
+                [style.width]="sideNavWidth">
                 <!--<command-executor (exportRoute)="importGeoJson($event)"></command-executor>-->
             </mat-sidenav>
 
@@ -21,11 +23,11 @@
 
 
 <mat-toolbar class="map-footer" color="primary">
-    <mat-card>
-        <mat-slide-toggle color="primary" checked="false" [(ngModel)]="togglePickPos">Picker</mat-slide-toggle>
-        <mat-card-content>
-            lat:<input value={{inputPosLat}}> / lon:<input value={{inputPosLng}} />
-        </mat-card-content>
+    <mat-card class="picker">
+        <mat-slide-toggle color="primary" checked="false" [(ngModel)]="togglePickPos">
+            {{togglePickPos?'Picker(place marker)':'Picker(marker disabled)'}}
+        </mat-slide-toggle>
+        <fluke-layer-editor-marker></fluke-layer-editor-marker>
     </mat-card>
 
 
@@ -33,7 +35,7 @@
     </mat-slide-toggle>
     <mat-slide-toggle class="sidenav-toggler" color="primary" checked="true" (change)="sidenavcmd.toggle()">Commands
     </mat-slide-toggle>
-    <mat-slider invert min="10" max="40" step="1" [(ngModel)]="sideNavWidth" (change)='_sideNavWidthChange()'>
+    <mat-slider invert min="10" max="40" step="1" [(ngModel)]="sliderVal" (change)='_sideNavWidthChange()'>
     </mat-slider>
 
 </mat-toolbar>

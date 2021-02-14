@@ -1,7 +1,7 @@
 <table class="full-width" cellspacing="0">
     <tr class="full-width">
         <td class="half-width">
-            <mat-form-field>
+            <mat-form-field (click)="$event.stopPropagation();">
                 <mat-label>Lat</mat-label>
                 <input matInput [formControl]='latFormControl' [errorStateMatcher]='latErrorChecker'
                     (input)='_editLayerSynced()'>
@@ -26,7 +26,7 @@
             </b>
         </td>
         <td class="half-width">
-            <mat-form-field>
+            <mat-form-field (click)="$event.stopPropagation();">
                 <mat-label>Lon</mat-label>
                 <input matInput [formControl]='lngFormControl' [errorStateMatcher]='lngErrorChecker'
                     (input)='_editLayerSynced()'>

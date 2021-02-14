@@ -24,3 +24,8 @@ export var markerIcon = new Icon({
     shadowSize: [20.5, 20.5],
     shadowUrl: 'marker-shadow.png'
 });
+
+export var defaultPathStyles = {
+    color: '#FF00AA',
+    weight: 1
+};

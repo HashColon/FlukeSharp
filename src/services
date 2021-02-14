@@ -1,0 +1,10 @@
+export enum FlukeSharpMessageType {
+    req_filelist,
+    bash,
+    error, return
+}
+
+export class FlukeSharpMessage {
+    messageType: FlukeSharpMessageType,
+    messageContent: any
+}

@@ -9,6 +9,7 @@
     left: 0;
     right: 0;
     z-index: 3;
+    
 }
 
 .map {
@@ -25,7 +26,15 @@
 }
 
 .picker{
-    font-size: 0.7em; 
-    width: 30em;
-    bottom: 30%;
+    max-width: 30em !important;
+}
+
+.windowResizer{
+    width: 15em;
+    max-width: 15em !important;
+}
+
+.windowResizerSlider{
+    //height: 15em;
+    width: 15em !important;
 }

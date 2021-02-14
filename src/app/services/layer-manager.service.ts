@@ -153,4 +153,17 @@ export class LayerManagerService {
     this.labeled = {};
   }
 
+  hideAll(): void {
+    delete this.visible;
+    this.visible = [];
+  }
+
+  showAll(): void {
+    for (var key of Object.keys(this.labeled)) {
+      if (!this.isVisible(key)) {
+        this.toggleLayer(key);
+      }
+    }
+  }
+
 }

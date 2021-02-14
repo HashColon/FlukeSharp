@@ -1,0 +1,31 @@
+<mat-toolbar color='primary'>
+    <button matSuffix mat-icon-button (click)='_setDirHome()'>
+        <mat-icon>home</mat-icon>
+    </button>
+    <button matSuffix mat-icon-button (click)='geojsonlist.selectAll()'>
+        <mat-icon>check_box</mat-icon>
+    </button>
+    <button matSuffix mat-icon-button (click)='geojsonlist.deselectAll()'>
+        <mat-icon>indeterminate_check_box</mat-icon>
+    </button>
+    <button matSuffix mat-icon-button (click)='requestSelectedGeoJson()'>
+        <mat-icon>open_in_new</mat-icon>
+    </button>
+</mat-toolbar>
+
+<mat-form-field class="full-width dirinput" appearance='outline'>
+    <mat-label>Current directory</mat-label>
+    <input matInput type="text" placeholder="~" aria-label="Current directory" [formControl]="dirControl"
+        [matAutocomplete]="dirAutocomplete" (input)='_editDirSynced()'>
+    <mat-autocomplete #dirAutocomplete="matAutocomplete" (optionSelected)="_editDirSynced()">
+        <mat-option *ngFor="let option of dirAutocompleteList" [value]="option" class="autocompletelist">
+            {{option}}
+        </mat-option>
+    </mat-autocomplete>
+</mat-form-field>
+
+<mat-selection-list #geojsonlist [(ngModel)]="selectedFiles">
+    <mat-list-option *ngFor='let afile of geojsonFiles' [value]="afile">
+        {{afile}}
+    </mat-list-option>
+</mat-selection-list>

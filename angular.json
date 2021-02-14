@@ -30,6 +30,11 @@
                 "glob": "**/*",
                 "input": "node_modules/leaflet/dist/images/", // you may need to change this path, according to your files structure
                 "output": "./"
+              },
+              {
+                "glob": "*.json",
+                "input": "/home/cadit/WTK/WTK_data/FlukeSharp/",
+                "output": "geojson/"
               }
             ],
             "styles": [
@@ -72,7 +77,9 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "FlukeSharp:build"
+            "browserTarget": "FlukeSharp:build",
+            "port": 1434,
+            "host": "0"
           },
           "configurations": {
             "production": {

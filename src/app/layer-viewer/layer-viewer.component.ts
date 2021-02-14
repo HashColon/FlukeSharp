@@ -66,7 +66,7 @@ export class LayerViewerComponent implements OnInit {
 
       console.log("addnewfilelayers: " + filelist[fidx].name);
       fileReader.onload = (e) => {
-        //console.log(fl[file].name + " : " + fileReader.result);
+        console.log(filelist[fidx].name + ' loaded');
 
         let geojson: any;
         // check geojson validity 
@@ -76,15 +76,18 @@ export class LayerViewerComponent implements OnInit {
           console.log('Invalid JSON file.');
           return false;
         } finally {
-          if (!GJV.valid(geojson)) {
-            console.log('Invalid GeoJSON file.');
-            return false;
-          }
+          // if (!GJV.valid(geojson)) {
+          //   console.log('Invalid GeoJSON file.');
+          //   return false;
+          // } else {
+          //   console.log(filelist[fidx].name + ' validated');
+          // }
         }
 
         this.manager.pushLayer(
           new GeoJSON(geojson), filelist[fidx].name, { forced: true }
         );
+        console.log(filelist[fidx].name + ' loaded as layer to leaflet-map');
       }
       fileReader.readAsText(filelist[fidx]);
     }
@@ -94,6 +97,14 @@ export class LayerViewerComponent implements OnInit {
 
   _clearAllLayers() {
     this.manager.clearAll();
+  }
+
+  _showAllLayers() {
+    this.manager.showAll();
+  }
+
+  _hideAllLayers() {
+    this.manager.hideAll();
   }
 
 }

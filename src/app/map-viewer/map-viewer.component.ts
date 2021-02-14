@@ -1,16 +1,19 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 
-import { Polyline, Map, LeafletMouseEvent, GeoJSON, Marker } from 'leaflet';
+import { Polyline, Map, LeafletMouseEvent, GeoJSON, Marker, Path, Polygon, Rectangle, Circle, CircleMarker } from 'leaflet';
 
 import { LayerManagerService } from '@fluke/services/layer-manager.service'
 import { LayerEditorMarkerComponent } from '@fluke/layer-viewer/layer-editor-marker.component';
 
 import * as leafletSetting from '@fluke/services/leaflet-custom-settings';
+import { BackendConnectorService } from '@fluke/services/backend-connector.service';
+import { GeoJsonValidator } from '@fluke/services/geojson-validator';
 
 @Component({
   selector: 'fluke-map-viewer',
   templateUrl: './map-viewer.component.html',
-  styleUrls: ['./map-viewer.component.scss']
+  styleUrls: ['./map-viewer.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class MapViewerComponent implements OnInit {
@@ -19,10 +22,19 @@ export class MapViewerComponent implements OnInit {
   togglePickPos: boolean = false;
   options = leafletSetting.options;
 
-  constructor(public layers: LayerManagerService) {
-  }
+  constructor(
+    public layers: LayerManagerService,
+    public backend: BackendConnectorService
+  ) { }
 
   ngOnInit() {
+    Path.mergeOptions(leafletSetting.defaultPathStyles);
+    Polyline.mergeOptions(leafletSetting.defaultPathStyles);
+    Polygon.mergeOptions(leafletSetting.defaultPathStyles);
+    Rectangle.mergeOptions(leafletSetting.defaultPathStyles);
+    Circle.mergeOptions(leafletSetting.defaultPathStyles);
+    CircleMarker.mergeOptions(leafletSetting.defaultPathStyles);
+    GeoJSON.mergeOptions(leafletSetting.defaultPathStyles);
   }
 
   sliderVal: number = 20;
@@ -37,14 +49,11 @@ export class MapViewerComponent implements OnInit {
   onMapReady(map: Map) {
     this.layers.map = map;
 
-    // console.log('test push');
-    this.layers.pushLayer(new GeoJSON(
-      new Polyline([[35.4, 126.6], [36.1, 127.1]]).toGeoJSON()
-    ), null, { forced: true });
-    this.layers.pushLayer(new GeoJSON(
-      new Polyline([[35.4333, 126.0], [36.012, 127.5]]).toGeoJSON()
-    ), null, { hide: true, forced: true });
-
+    // this.geojsonimporter.getGeoJson("geojson/test_All.json").subscribe(
+    //   (data) => {
+    //     this.layers.pushLayer(new GeoJSON(data), "test_All.json");
+    //   }
+    // );
   }
 
   onMapClick(e: LeafletMouseEvent) {

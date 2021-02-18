@@ -2,8 +2,13 @@
     <mat-label>Backend Host:Port</mat-label>
     <input matInput (change)='connectBackend(wsControl.value)' (click)="$event.stopPropagation();"
         [formControl]="wsControl">
-    <button mat-icon-button matSuffix color='primary'
+    <button mat-icon-button matSuffix color='primary' matTooltip="Connect!"
         (click)='$event.stopPropagation();connectBackend(wsControl.value)'>
         <mat-icon>check</mat-icon>
+    </button>
+    <button mat-icon-button matSuffix [color]="backend.isSocketReady?'disabled':'warn'"
+        matTooltip="Troubleshoot ssl certification problem"
+        (click)='$event.stopPropagation(); !backend.isSocketReady?troubleshootWSS():"";'>
+        <mat-icon>build</mat-icon>
     </button>
 </mat-form-field>

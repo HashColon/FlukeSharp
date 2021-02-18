@@ -25,5 +25,7 @@ export class BackendConnectorViewerComponent implements OnInit {
     this.backend.connectBackend(address);
   }
 
-
+  troubleshootWSS() {
+    window.open("https://" + this.backend.address);
+  }
 }

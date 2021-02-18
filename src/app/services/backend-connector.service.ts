@@ -25,7 +25,7 @@ export class BackendConnectorService {
   connectBackend(address: string) {
     if (!this.isSocketReady || this.address != address) {
       this.address = address;
-      this.ws = new WebSocket("ws://" + address);
+      this.ws = new WebSocket("wss://" + address);
       console.log('socket connection trial');
 
       this.ws.onopen = event => {

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { fromEventPattern } from 'rxjs';
+import { BackendConnectorService } from '@fluke/services/backend-connector.service';
 
 @Component({
   selector: 'fluke-command-viewer',
@@ -12,7 +14,7 @@ export class CommandViewerComponent implements OnInit {
     cursorStyle: 'bar'
   }
 
-  constructor() { }
+  constructor(public backend: BackendConnectorService) { }
 
   ngOnInit(): void {
   }

@@ -1,1 +1,12 @@
-<ng-terminal [displayOption]='terminalDisplayOptions'></ng-terminal>
+<div *ngIf='backend.isSocketReady;else notconnected' class='full-height'>
+    Not Implemented.
+    <ng-terminal [displayOption]='terminalDisplayOptions'></ng-terminal>
+</div>
+<ng-template #notconnected>
+    <div style="display:block; margin:auto; text-align: center; ">
+        <br />
+        <span> Command terminal: Backend server not ready.</span>
+        <br />
+    </div>
+    <fluke-backend-connector-viewer></fluke-backend-connector-viewer>
+</ng-template>

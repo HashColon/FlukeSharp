@@ -20,7 +20,8 @@
                     <mat-sidenav-content>
                         <mat-toolbar class="map-footer">
 
-                            <mat-menu #picker="matMenu" [hasBackdrop]="false" class="picker">
+                            <mat-menu #picker="matMenu" [hasBackdrop]="false" (click)="$event.stopPropagation();"
+                                class="picker">
                                 <mat-card class="picker">
                                     <mat-slide-toggle color="primary" checked="false" [(ngModel)]="togglePickPos"
                                         (click)="$event.stopPropagation();">
@@ -30,11 +31,17 @@
                                 </mat-card>
                             </mat-menu>
 
-                            <mat-menu #windowResizer="matMenu" [hasBackdrop]="false" class="windowResizer">
+                            <mat-menu #windowResizer="matMenu" [hasBackdrop]="false" (click)="$event.stopPropagation();"
+                                class="windowResizer">
                                 <mat-slider invert min="10" max="40" step="1" [(ngModel)]="sliderVal"
                                     (change)='_sideNavWidthChange()' (click)="$event.stopPropagation();"
                                     class="windowResizerSlider">
                                 </mat-slider>
+                            </mat-menu>
+
+                            <mat-menu #backendConnector="matMenu" [hasBackdrop]="false"
+                                (click)="$event.stopPropagation();" class="backendConnector">
+                                <fluke-backend-connector-viewer></fluke-backend-connector-viewer>
                             </mat-menu>
 
                             <mat-button-toggle multiple color="primary">
@@ -55,6 +62,11 @@
                                 </mat-button-toggle>
                                 <mat-button-toggle (change)="sidenavcmd.toggle()" matTooltip="Show command window">
                                     Commands
+                                </mat-button-toggle>
+                                <mat-button-toggle [matMenuTriggerFor]="backendConnector"
+                                    matTooltip="Set backend server connection">
+                                    <mat-icon [color]="backend.isSocketReady?'primary':'warn'">dynamic_form
+                                    </mat-icon>
                                 </mat-button-toggle>
                             </mat-button-toggle>
 

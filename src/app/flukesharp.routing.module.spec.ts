@@ -1,4 +1,4 @@
-import { MapViewerRoutingModule } from './map-viewer.routing.module';
+import { MapViewerRoutingModule } from './flukesharp.routing.module';
 
 describe('MapViewerRoutingModule', () => {
   let mapViewerRoutingModule: MapViewerRoutingModule;

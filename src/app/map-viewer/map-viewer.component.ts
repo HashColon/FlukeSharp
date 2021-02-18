@@ -7,7 +7,7 @@ import { LayerEditorMarkerComponent } from '@fluke/layer-viewer/layer-editor-mar
 
 import * as leafletSetting from '@fluke/services/leaflet-custom-settings';
 import { BackendConnectorService } from '@fluke/services/backend-connector.service';
-import { GeoJsonValidator } from '@fluke/services/geojson-validator';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'fluke-map-viewer',

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MapViewerModule } from '@fluke/map-viewer/map-viewer.module';
+import { FlukeSharpModule } from '@fluke/flukesharp.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +14,7 @@ import { MapViewerModule } from '@fluke/map-viewer/map-viewer.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MapViewerModule
+    FlukeSharpModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MapViewerComponent } from './map-viewer.component';
+import { MapViewerComponent } from '@fluke/map-viewer/map-viewer.component';
 
-const mapViewerRoutes: Routes = [
+const FlukeSharpRoutes: Routes = [
   // {
   //   path: 'viewer',
   //   children: [
   //     { path: '**', component: LeafletViewerComponent }
   //   ]
   // },
-  { path: 'test', component: MapViewerComponent }
+  { path: 'flukesharp', component: MapViewerComponent }
 ]
 
 @NgModule({
   imports: [
-    RouterModule.forChild(mapViewerRoutes)
+    RouterModule.forChild(FlukeSharpRoutes)
   ],
   exports: [RouterModule]
 })
-export class MapViewerRoutingModule { }
+export class FlukeSharpRoutingModule { }

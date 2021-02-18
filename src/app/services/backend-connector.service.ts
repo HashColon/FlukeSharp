@@ -1,5 +1,4 @@
 import { Injectable, Output } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { FlukeSharpMessage, FlukeSharpMessageType } from '@fluke/services/flukesharp-message'
 import { EventEmitter } from 'events';
@@ -13,16 +12,31 @@ export class BackendConnectorService {
 
   messageList: { [key: string]: any }[] = [];
   ws: WebSocket;
+
   isSocketReady: boolean = false;
+  address: string = '';
 
   constructor(
-    private http: HttpClient
+    //public http: HttpClient
   ) {
-    this.ws = new WebSocket("ws://147.46.234.43:1435");
-    this.ws.onopen = event => {
-      this.isSocketReady = true;
-      this.socketReadyEvent.emit("socketready");
-    };
+    //this.connectBackend("");
+  }
+
+  connectBackend(address: string) {
+    if (!this.isSocketReady || this.address != address) {
+      this.address = address;
+      this.ws = new WebSocket("ws://" + address);
+      console.log('socket connection trial');
+
+      this.ws.onopen = event => {
+        this.isSocketReady = true;
+        this.socketReadyEvent.emit("socketready");
+      };
+      this.ws.onclose = event => {
+        this.isSocketReady = false;
+        this.socketReadyEvent.emit("socketclosed");
+      }
+    }
   }
 
   generateKey(): string {
@@ -52,9 +66,9 @@ export class BackendConnectorService {
     else return "";
   }
 
-  getGeoJson(filepath: string): Observable<any> {
-    return this.http.get(filepath);
-  }
+  // getGeoJson(filepath: string): Observable<any> {
+  //   return this.http.get(filepath);
+  // }
 
   requestGeoJsons(filepaths: string[]): string {
     if (this.isSocketReady) {
@@ -100,11 +114,4 @@ export class BackendConnectorService {
   }
 
   runBashCommand() { }
-
-  // getResourceNames(): string[] {
-  //   var re: string[];
-  //     //fs.readdir()
-  //     this.http.head()
-  //   return re;
-  // }
 }

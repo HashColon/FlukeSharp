@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GeojsonImporterService } from './backend-connector.service';
+import { BackendConnectorService } from './backend-connector.service';
 
-describe('GeojsonImportorService', () => {
-  let service: GeojsonImporterService;
+describe('BackendConnectorService', () => {
+  let service: BackendConnectorService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(GeojsonImporterService);
+    service = TestBed.inject(BackendConnectorService);
   });
 
   it('should be created', () => {

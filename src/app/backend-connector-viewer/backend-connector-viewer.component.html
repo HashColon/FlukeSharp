@@ -1,0 +1,9 @@
+<mat-form-field class="dirinput" (click)="$event.stopPropagation();">
+    <mat-label>Backend Host:Port</mat-label>
+    <input matInput (change)='connectBackend(wsControl.value)' (click)="$event.stopPropagation();"
+        [formControl]="wsControl">
+    <button mat-icon-button matSuffix color='primary'
+        (click)='$event.stopPropagation();connectBackend(wsControl.value)'>
+        <mat-icon>check</mat-icon>
+    </button>
+</mat-form-field>

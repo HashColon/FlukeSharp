@@ -13,56 +13,53 @@ enum msgtype { filelist, dirlist, geojson };
   selector: 'fluke-file-explorer-viewer',
   templateUrl: './file-explorer-viewer.component.html',
   styleUrls: ['./file-explorer-viewer.component.scss'],
-  providers: [BackendConnectorService]
 })
 export class FileExplorerViewerComponent implements OnInit {
 
   constructor(
     public backend: BackendConnectorService,
     public layers: LayerManagerService) {
-    this.backend.getConnector()
-      .subscribe(
-        (data) => {
-          var parsedJson: FlukeSharpMessage;
-          try {
-            parsedJson = JSON.parse(data);
-          } catch (e) {
-            console.error('Parsing returned message failed');
-          }
-
-          if (parsedJson.messageType == FlukeSharpMessageType.error) {
-            switch (this.msgKeyList[parsedJson.messageKey]) {
-              case msgtype.dirlist:
-              case msgtype.filelist:
-                break;
-              default:
-                console.log(parsedJson.messageContent);
-            }
-
-          }
-          else if (parsedJson.messageType == FlukeSharpMessageType.return) {
-            switch (this.msgKeyList[parsedJson.messageKey]) {
-              case msgtype.dirlist:
-                this.retrieveDirList(parsedJson);
-                break;
-              case msgtype.filelist:
-                this.retrieveFileList(parsedJson);
-                break;
-              case msgtype.geojson:
-                this.retrieveGeoJson(parsedJson);
-                break;
-              default:
-                break;
-            }
-          }
-        });
     this.backend.socketReadyEvent.prependOnceListener("socketready",
       () => {
-        //this.dirControl.setValue("/home/cadit/WTK/WTK_data/ExactEarth/geojson/byDeptArri");
         this.dirControl.setValue(this._home);
+        this.backend.getConnector()
+          .subscribe(
+            (data) => {
+              var parsedJson: FlukeSharpMessage;
+              try {
+                parsedJson = JSON.parse(data);
+              } catch (e) {
+                console.error('Parsing returned message failed');
+              }
+
+              if (parsedJson.messageType == FlukeSharpMessageType.error) {
+                switch (this.msgKeyList[parsedJson.messageKey]) {
+                  case msgtype.dirlist:
+                  case msgtype.filelist:
+                    break;
+                  default:
+                    console.log(parsedJson.messageContent);
+                }
+
+              }
+              else if (parsedJson.messageType == FlukeSharpMessageType.return) {
+                switch (this.msgKeyList[parsedJson.messageKey]) {
+                  case msgtype.dirlist:
+                    this.retrieveDirList(parsedJson);
+                    break;
+                  case msgtype.filelist:
+                    this.retrieveFileList(parsedJson);
+                    break;
+                  case msgtype.geojson:
+                    this.retrieveGeoJson(parsedJson);
+                    break;
+                  default:
+                    break;
+                }
+              }
+            });
         this.requestFileList(this.dirControl.value, ".json");
         this.requestDirList(this.dirControl.value);
-
       });
   }
 

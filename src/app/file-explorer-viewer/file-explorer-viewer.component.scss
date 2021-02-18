@@ -10,3 +10,8 @@
     font-size: 1em;
     height: 2em;
 }
+
+mat-selection-list{
+    max-height: calc(100vh - 175px);
+    overflow: auto;
+}

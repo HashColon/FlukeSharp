@@ -14,7 +14,7 @@ const FlukeSharpRoutes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forChild(FlukeSharpRoutes)
+    RouterModule.forRoot(FlukeSharpRoutes)
   ],
   exports: [RouterModule]
 })

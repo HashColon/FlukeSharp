@@ -79,7 +79,10 @@
           "options": {
             "browserTarget": "FlukeSharp:build",
             "port": 1434,
-            "host": "0"
+            "host": "0",
+            "ssl": true,
+            "sslKey": "/home/cadit/WTK/ssl_keys/key.pem",
+            "sslCert": "/home/cadit/WTK/ssl_keys/cert.pem"
           },
           "configurations": {
             "production": {

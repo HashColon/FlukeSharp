@@ -39,8 +39,8 @@ export class LayerEditorGeojsonComponent implements OnInit {
 
   _editLayer(): boolean {
     try {
-      this.manager.editLayer(
-        new GeoJSON(JSON.parse(this.formControl.value)),
+      this.manager.editGeoJsonLayer(
+        JSON.parse(this.formControl.value),
         this.label);
     } catch (e) {
       //console.log('_editLayer: ' + this.formControl.value);

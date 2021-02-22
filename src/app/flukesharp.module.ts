@@ -18,7 +18,6 @@ import { LayerEditorGeojsonComponent } from '@fluke/layer-viewer/layer-editor-ge
 import { LayerEditorMarkerComponent } from '@fluke/layer-viewer/layer-editor-marker.component';
 import { CommandViewerComponent } from '@fluke/command-viewer/command-viewer.component';
 import { FileExplorerViewerComponent } from '@fluke/file-explorer-viewer/file-explorer-viewer.component';
-import { BackendConnectorService } from './services/backend-connector.service';
 import { BackendConnectorViewerComponent } from './backend-connector-viewer/backend-connector-viewer.component';
 
 //import { CommandViewerComponent } from '@fluke/command-viewer/command-viewer.component';

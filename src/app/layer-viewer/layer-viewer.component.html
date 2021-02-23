@@ -27,6 +27,11 @@
     <button mat-icon-button matTooltip='Collapse All' (click)='layerlist.closeAll()'>
         <mat-icon>unfold_less</mat-icon>
     </button>
+    <button mat-icon-button matTooltip="{{manager.autoStyle?'GeoJson color: Auto':'GeoJson color: Manual'}}"
+        (click)='manager.toggleStyle()'>
+        <mat-icon>{{manager.autoStyle?'invert_colors':'invert_colors_off'}}</mat-icon>
+    </button>
+
 </mat-toolbar>
 
 <mat-accordion multi>

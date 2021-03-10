@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FlukeSharpMessage, FlukeSharpMessageType } from '@fluke/services/flukesharp-message';
-import { BackendConnectorService } from '@fluke/services/backend-connector.service';
+import { HashColonMessage, HashColonMessageType } from '@HashColonBackend/hashcolon-message';
+import { BackendConnectorService } from '@HashColonBackend/backend-connector.service';
 import { LayerManagerService } from '@fluke/services/layer-manager.service';
 import { Layer, GeoJSON } from 'leaflet';
 import { TypeScriptEmitter } from '@angular/compiler';
@@ -25,14 +25,14 @@ export class FileExplorerViewerComponent implements OnInit {
         this.backend.getConnector()
           .subscribe(
             (data) => {
-              var parsedJson: FlukeSharpMessage;
+              var parsedJson: HashColonMessage;
               try {
                 parsedJson = JSON.parse(data);
               } catch (e) {
                 console.error('Parsing returned message failed');
               }
 
-              if (parsedJson.messageType == FlukeSharpMessageType.error) {
+              if (parsedJson.messageType == HashColonMessageType.error) {
                 switch (this.msgKeyList[parsedJson.messageKey]) {
                   case msgtype.dirlist:
                   case msgtype.filelist:
@@ -42,7 +42,7 @@ export class FileExplorerViewerComponent implements OnInit {
                 }
 
               }
-              else if (parsedJson.messageType == FlukeSharpMessageType.return) {
+              else if (parsedJson.messageType == HashColonMessageType.return) {
                 switch (this.msgKeyList[parsedJson.messageKey]) {
                   case msgtype.dirlist:
                     this.retrieveDirList(parsedJson);
@@ -77,7 +77,7 @@ export class FileExplorerViewerComponent implements OnInit {
     this.msgKeyList[key] = msgtype.filelist;
   }
 
-  retrieveFileList(msg: FlukeSharpMessage) {
+  retrieveFileList(msg: HashColonMessage) {
     this.geojsonFiles = msg.messageContent as string[];
   }
 
@@ -86,7 +86,7 @@ export class FileExplorerViewerComponent implements OnInit {
     this.msgKeyList[key] = msgtype.dirlist;
   }
 
-  retrieveDirList(msg: FlukeSharpMessage) {
+  retrieveDirList(msg: HashColonMessage) {
     this.dirAutocompleteList = msg.messageContent as string[];
   }
 
@@ -122,7 +122,7 @@ export class FileExplorerViewerComponent implements OnInit {
     this.msgKeyList[key] = msgtype.geojson;
   }
 
-  retrieveGeoJson(msg: FlukeSharpMessage) {
+  retrieveGeoJson(msg: HashColonMessage) {
     var geojsons = msg.messageContent;
     for (var item of geojsons) {
       try {

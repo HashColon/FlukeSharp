@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { fromEventPattern } from 'rxjs';
-import { BackendConnectorService } from '@fluke/services/backend-connector.service';
+import { BackendConnectorService } from '@HashColonBackend/backend-connector.service';
 
 @Component({
   selector: 'fluke-command-viewer',

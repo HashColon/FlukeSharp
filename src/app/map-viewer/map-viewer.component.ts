@@ -6,7 +6,7 @@ import { LayerManagerService } from '@fluke/services/layer-manager.service'
 import { LayerEditorMarkerComponent } from '@fluke/layer-viewer/layer-editor-marker.component';
 
 import * as leafletSetting from '@fluke/services/leaflet-custom-settings';
-import { BackendConnectorService } from '@fluke/services/backend-connector.service';
+import { BackendConnectorService } from '@HashColonBackend/backend-connector.service';
 import { FormControl } from '@angular/forms';
 
 @Component({

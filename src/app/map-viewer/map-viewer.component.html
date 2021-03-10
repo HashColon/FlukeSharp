@@ -41,7 +41,7 @@
 
                             <mat-menu #backendConnector="matMenu" [hasBackdrop]="false"
                                 (click)="$event.stopPropagation();" class="backendConnector">
-                                <fluke-backend-connector-viewer></fluke-backend-connector-viewer>
+                                <!-- <hashcolon-backend-connector-viewer></hashcolon-backend-connector-viewer> -->
                             </mat-menu>
 
                             <mat-button-toggle multiple color="primary">
@@ -68,6 +68,7 @@
                                     <mat-icon [color]="backend.isSocketReady?'primary':'warn'">dynamic_form
                                     </mat-icon>
                                 </mat-button-toggle>
+
                             </mat-button-toggle>
 
                         </mat-toolbar>

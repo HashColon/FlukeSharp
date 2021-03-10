@@ -18,10 +18,8 @@ import { LayerEditorGeojsonComponent } from '@fluke/layer-viewer/layer-editor-ge
 import { LayerEditorMarkerComponent } from '@fluke/layer-viewer/layer-editor-marker.component';
 import { CommandViewerComponent } from '@fluke/command-viewer/command-viewer.component';
 import { FileExplorerViewerComponent } from '@fluke/file-explorer-viewer/file-explorer-viewer.component';
-import { BackendConnectorViewerComponent } from './backend-connector-viewer/backend-connector-viewer.component';
 
-//import { CommandViewerComponent } from '@fluke/command-viewer/command-viewer.component';
-//import { BashExecutorComponent } from '@fluke/command-viewer/bash-executor.component';
+import { BackendConnectorModule } from '@HashColonBackend/backend-connector.module';
 
 
 @NgModule({
@@ -30,9 +28,7 @@ import { BackendConnectorViewerComponent } from './backend-connector-viewer/back
     LayerViewerComponent, LayerEditorComponent,
     LayerEditorGeojsonComponent, LayerEditorMarkerComponent,
 
-    CommandViewerComponent, FileExplorerViewerComponent, BackendConnectorViewerComponent
-
-    // CommandViewerComponent, BashExecutorComponent,
+    CommandViewerComponent, FileExplorerViewerComponent
   ],
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule,
@@ -40,7 +36,8 @@ import { BackendConnectorViewerComponent } from './backend-connector-viewer/back
     MaterialModule,
 
     LeafletModule,
-    FlukeSharpRoutingModule
+    FlukeSharpRoutingModule,
+    BackendConnectorModule
   ]
 })
 export class FlukeSharpModule { }

@@ -19,6 +19,9 @@
     "paths": {
       "@fluke/*": [
         "src/app/*"
+      ],
+      "@HashColonBackend/*": [
+        "src/app/backendconnector/src/app/*"
       ]
     }
   }

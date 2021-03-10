@@ -39,10 +39,7 @@
                                 </mat-slider>
                             </mat-menu>
 
-                            <mat-menu #backendConnector="matMenu" [hasBackdrop]="false"
-                                (click)="$event.stopPropagation();" class="backendConnector">
-                                <hashcolon-backend-connector-viewer></hashcolon-backend-connector-viewer>
-                            </mat-menu>
+
 
                             <mat-button-toggle multiple color="primary">
 
@@ -62,11 +59,6 @@
                                 </mat-button-toggle>
                                 <mat-button-toggle (change)="sidenavcmd.toggle()" matTooltip="Show command window">
                                     Commands
-                                </mat-button-toggle>
-                                <mat-button-toggle [matMenuTriggerFor]="backendConnector"
-                                    matTooltip="Set backend server connection">
-                                    <mat-icon [color]="backend.isSocketReady?'primary':'warn'">dynamic_form
-                                    </mat-icon>
                                 </mat-button-toggle>
 
                             </mat-button-toggle>

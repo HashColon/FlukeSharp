@@ -1,0 +1,3 @@
+[submodule "src/app/backendconnector"]
+	path = src/app/backendconnector
+	url = https://github.com/HashColon/HashColon.BackendConnector.git
